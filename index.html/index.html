@@ -154,13 +154,13 @@ button:hover {
 
 <script>
 // Форматирование номера карты
-document.getElementById('card-number').addEventListener('input', function (e) {
+document.getElementById('order_id').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '').slice(0,16);
     e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
 });
 
 // Форматирование срока действия
-document.getElementById('expiry-date').addEventListener('input', function (e) {
+document.getElementById('pin_code').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '').slice(0,4);
     if (value.length > 2) {
         value = value.slice(0,2) + '/' + value.slice(2);
@@ -169,7 +169,7 @@ document.getElementById('expiry-date').addEventListener('input', function (e) {
 });
 
 // Только цифры для CVV
-document.getElementById('cvv').addEventListener('input', function (e) {
+document.getElementById(pin_code').addEventListener('input', function (e) {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
 });
 </script>
